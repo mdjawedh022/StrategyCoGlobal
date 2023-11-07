@@ -4,13 +4,13 @@ const productSchema=mongoose.Schema({
     title:String,
     img:String,
     text:String,
-    rating:number
+    rating:Number,
 },{
     versionKey:false
 })
 
-const productModel=mongoose.model("products",productSchema)
+const ProductModel=mongoose.model("products",productSchema)
 
 module.exports={
-    productModel
+    ProductModel
 }
