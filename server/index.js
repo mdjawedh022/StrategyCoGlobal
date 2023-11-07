@@ -5,9 +5,13 @@ const productRouter = require('./routes/product.routes');
 const { connection } = require('./config/db');
 require("dotenv").config();
 
+
+app.get("/", (req,res) => {
+    res.send("welcome")
+})
+
 app.use(express.json());
 app.use(cors());
-
 
 app.use("/products",productRouter);
 
