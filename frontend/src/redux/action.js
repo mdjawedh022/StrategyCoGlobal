@@ -8,6 +8,8 @@ import {
   GET_PRODUCT_SUCCESS,
 } from "./actionType";
 
+const BASE_URL = "https://calm-mite-loincloth.cyclic.app/products";
+
 const getProductRequestAction = () => {
   return { type: GET_PRODUCT_REQUEST };
 };
@@ -20,23 +22,28 @@ const getProductFailureAction = () => {
   return { type: GET_PRODUCT_FAILURE };
 };
 
-export const getProduct = () => (dispatch) => {
-  dispatch(getProductRequestAction());
-
-  axios
-    .get("https://calm-mite-loincloth.cyclic.app/products")
-    .then((res) => {
-      dispatch(getProductSuccessAction(res.data));
-    })
-    .catch((err) => {
-      dispatch(getProductFailureAction());
-    });
-};
+export const getProduct =
+  (title) =>
+  (dispatch) => {
+    dispatch(getProductRequestAction());
+    let fetchUrl = BASE_URL;
+    if (title) {
+      fetchUrl = `${fetchUrl}?search=${title}`;
+    }
+    axios
+      .get(`${fetchUrl}`)
+      .then((res) => {
+        dispatch(getProductSuccessAction(res.data));
+      })
+      .catch((err) => {
+        dispatch(getProductFailureAction());
+      });
+  };
 
 export const getProductByid = (id) => (dispatch) => {
   dispatch(getProductRequestAction());
   axios
-    .get(`https://calm-mite-loincloth.cyclic.app/products/${id}`)
+    .get(`${BASE_URL}/${id}`)
     .then((res) => {
       dispatch({ type: GET_PRODUCTID_SUCCESS, payload: res.data });
     })

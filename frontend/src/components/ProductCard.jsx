@@ -17,6 +17,7 @@ const  funcDetail=()=>{
       </div>
       <div className="desc">
         <h3>{product.Title}</h3>
+        <h5>{product.Cat}</h5>
         <button onClick={funcDetail}>Detail</button>
       </div>
     </div>
