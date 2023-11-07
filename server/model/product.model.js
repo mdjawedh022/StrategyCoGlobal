@@ -2,10 +2,13 @@ const mongoose = require("mongoose");
 
 const productSchema = mongoose.Schema(
   {
-    title: String,
-    img: String,
-    text: String,
-    rating: Number,
+    Title: String,
+    Year: String,
+    imdbID: String,
+    Type: String,
+    Poster: String,
+    Rating: Number,
+    Cat: String,
   },
   {
     versionKey: false,
@@ -15,5 +18,5 @@ const productSchema = mongoose.Schema(
 const ProductModel = mongoose.model("products", productSchema);
 
 module.exports = {
-  ProductModel
+  ProductModel,
 };

@@ -48,7 +48,23 @@ const productRouter = express.Router();
 // GET all products
 productRouter.get("/", async (req, res) => {
   try {
-    const products = await ProductModel.find();
+    const { search, cat, year } = req.query;
+    const filter = {};
+    if (search) {
+      const regexPattern = new RegExp(search, "i");
+      filter.Title = regexPattern;
+    }
+
+    if (cat) {
+      const catRegex = new RegExp(cat, "i");
+      filter.Cat = catRegex;
+    }
+
+    if (year) {
+      filter.Year = year;
+    }
+
+    const products = await ProductModel.find(filter);
     res.status(200).json(products);
   } catch (err) {
     res.status(500).json({ error: "Something went wrong" });
